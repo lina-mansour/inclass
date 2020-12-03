@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.os.AsyncTask;
 import android.widget.ListView;
@@ -29,18 +30,21 @@ import java.net.URLConnection;
 import edu.birzeit.restapp.R;
 
 public class MainActivity extends AppCompatActivity {
-
+    String[] books;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
+//        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_list_item_1,
+//                books  );
+//        ListView listView = (ListView)findViewById(R.id.main_menu);
+//        listView.setAdapter(listAdapter);
 
     }
     public void onClickbtn(View view) {
 
         EditText edtCat = findViewById(R.id.edtCat);
-
-
         String url = "http://10.0.2.2:80/rest/info.php?id=" + edtCat.getText();
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.INTERNET)
@@ -114,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Networking", e.getLocalizedMessage());
             return "";
         }
+
         return str;
     }
 
@@ -125,12 +130,12 @@ public class MainActivity extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(String result) {
-            //Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
-            //String[] books = result.split(",");
-            //String str = "";
-            //for(String s : books){
-            //    str+= s + "\n";
-            // }
+            Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+          books = result.split(",");
+            String str = "";
+            for(String s : books){
+                str+= s + "\n";
+             }
             EditText edtData = findViewById(R.id.edtData);
 
             edtData.setText(result);
