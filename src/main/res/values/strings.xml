@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RestApp</string>
+    <string-array name="options">
+        <item>result 1</item>
+        <item>result2</item>
+    </string-array>
+</resources>
